@@ -1,0 +1,113 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+
+
+
+}
+.content{
+   
+    background-image: url('https://www.cflowapps.com/wp-content/uploads/2018/07/task-management-process.png'); 
+    background-size: cover; 
+    background-position:  center; 
+    background-repeat: no-repeat; 
+    height: 90vh; 
+    width: 90%; 
+
+}
+
+
+/* Navbar container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 10px 20px;
+}
+
+/* Logo styling */
+.navbar .logo {
+  color: #fff;
+  font-size: 24px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Links container */
+.navbar .nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Navigation links styling */
+.navbar .nav-links a {
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 16px;
+  transition: background-color 0.3s;
+}
+
+/* Dropdown container */
+.navbar .dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown button styling */
+.navbar .dropdown .dropbtn {
+  background-color: #333;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* Dropdown content styling */
+.navbar .dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #444;
+  min-width: 150px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.navbar .dropdown-content a {
+  color: #fff;
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  transition: background-color 0.3s;
+}
+
+/* Hover effect for dropdown items */
+.navbar .dropdown-content a:hover {
+  background-color: #575757;
+}
+
+/* Show dropdown on hover */
+.navbar .dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Hover effect for nav links */
+.navbar .nav-links a:hover, 
+.navbar .dropdown .dropbtn:hover {
+  background-color: #575757;
+  border-radius: 4px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .navbar {
+      flex-wrap: wrap;
+  }
+
+  .navbar .nav-links {
+      justify-content: center;
+      width: 100%;
+      margin-top: 10px;
+  }
+}
