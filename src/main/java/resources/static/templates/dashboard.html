@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to Your Dashboard, <span th:text="${user.username}"></span>!</h1>
+        <nav>
+            <ul>
+                <li><a href="/tasks">All Tasks</a></li>
+                <li><a href="/tasks/new">Create New Task</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="task-summary">
+            <h2>Task Summary</h2>
+            <div class="summary-cards">
+                <div class="card">
+                    <h3>Pending Tasks</h3>
+                    <p th:text="${pendingTasks.size()}"></p>
+                </div>
+                <div class="card">
+                    <h3>In Progress Tasks</h3>
+                    <p th:text="${inProgressTasks.size()}"></p>
+                </div>
+                <div class="card">
+                    <h3>Completed Tasks</h3>
+                    <p th:text="${completedTasks.size()}"></p>
+                </div>
+                <div class="card">
+                    <h3>High Priority Tasks</h3>
+                    <p th:text="${highPriorityTasks.size()}"></p>
+                </div>
+            </div>
+        </section>
+
+        <section class="your-tasks">
+            <h2>Your Tasks</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Deadline</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="task : ${tasks}">
+                        <td th:text="${task.title}"></td>
+                        <td th:text="${task.priority}"></td>
+                        <td th:text="${task.status}"></td>
+                        <td th:text="${task.deadline}"></td>
+                        <td>
+                            <a th:href="@{/tasks/{id}/edit(id=${task.id})}">Edit</a>
+                            <a th:href="@{/tasks/{id}/delete(id=${task.id})}">Delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="admin-section" sec:authorize="hasRole('ADMIN')">
+            <h2>Admin Priority Tasks</h2>
+            <div class="admin-cards">
+                <div class="card">
+                    <h3>Urgent Tasks</h3>
+                    <p th:text="${urgentTasks.size()}"></p>
+                </div>
+                <div class="card">
+                    <h3>Important Tasks</h3>
+                    <p th:text="${importantTasks.size()}"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
+

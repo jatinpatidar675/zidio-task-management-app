@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <title>Create/Edit Task</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <h2 th:text="${task.id == null ? 'Create Task' : 'Edit Task'}"></h2>
+    <form th:action="${task.id == null ? '/tasks' : '/tasks/' + task.id}" th:object="${task}" method="post">
+        <input type="hidden" th:field="*{id}" />
+        <div>
+            <label for="title">Title:</label>
+            <input type="text" id="title" th:field="*{title}" required>
+        </div>
+        <div>
+            <label for="description">Description:</label>
+            <textarea id="description" th:field="*{description}"></textarea>
+        </div>
+        <div>
+            <label for="priority">Priority:</label>
+            <select id="priority" th:field="*{priority}">
+                <option th:each="priorityOpt : ${T(com.example.taskplanner.model.Priority).values()}"
+                        th:value="${priorityOpt}" th:text="${priorityOpt}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="status">Status:</label>
+            <select id="status" th:field="*{status}">
+                <option th:each="statusOpt : ${T(com.example.taskplanner.model.Status).values()}"
+                        th:value="${statusOpt}" th:text="${statusOpt}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="deadline">Deadline:</label>
+            <input type="date" id="deadline" th:field="*{deadline}" required>
+        </div>
+        <div>
+            <label for="assignedUser">Assigned User:</label>
+            <select id="assignedUser" th:field="*{assignedUser.id}">
+                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="category">Category:</label>
+            <select id="category" th:field="*{category.id}">
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+            </select>
+        </div>
+        <div sec:authorize="hasRole('ADMIN')">
+            <label for="adminPriority">Admin Priority:</label>
+            <select id="adminPriority" th:field="*{adminPriority}">
+                <option th:each="adminPriorityOpt : ${T(com.example.taskplanner.model.AdminPriority).values()}"
+                        th:value="${adminPriorityOpt}" th:text="${adminPriorityOpt}"></option>
+            </select>
+        </div>
+        <button type="submit" th:text="${task.id == null ? 'Create Task' : 'Update Task'}"></button>
+    </form>
+</body>
+</html>
+
